@@ -8,7 +8,6 @@ from typing import Callable, Dict, List
 History = Dict[str, List[float]]
 
 
-# noinspection PyTypeChecker
 class Trainer:
     """Encapsulates the model training loop"""
 

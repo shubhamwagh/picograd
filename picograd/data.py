@@ -24,19 +24,3 @@ class BatchIterator:
             batch_inputs = self.inputs[start:end]
             batch_targets = self.targets[start:end]
             yield Batch(inputs=batch_inputs, targets=batch_targets)
-
-
-if __name__ == "__main__":
-    x = [
-        [1, 2, 3],
-        [3, 4, 5],
-        [5, 6, 7],
-        [6, 7, 8]
-    ]
-
-    y = [1, -1, 1, -1]
-
-    b = BatchIterator(x, y, 2)
-    for g in b:
-        print(g)
-
