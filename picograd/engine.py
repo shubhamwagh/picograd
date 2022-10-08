@@ -1,7 +1,5 @@
 """
 Autograd engine implementing reverse-mode auto-differentiation, aka backpropagation.
-
-Heavily inspired by https://github.com/karpathy/micrograd/blob/master/micrograd/engine.py
 """
 
 import math
@@ -175,3 +173,10 @@ class Var:
         self.grad = 1.0
         for node in reversed(topo):
             node._backward()
+
+
+if __name__ == "__main__":
+    a = Var(2.0)
+    b = Var(3.0)
+    c = (a - b) ** 2
+    print(c)

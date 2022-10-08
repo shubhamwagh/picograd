@@ -1,9 +1,3 @@
-"""
-Inspired from:
- 1) https://github.com/karpathy/micrograd/blob/master/trace_graph.ipynb
- 2) https://github.com/PABannier/nanograd/blob/master/nanograd/viz/comp_graph.py
-"""
-
 from abc import ABC, abstractmethod
 from graphviz import Digraph
 
