@@ -1,5 +1,5 @@
 """
-Autograd engine implementing reverse-mode autodifferentiation, aka backpropagation.
+Autograd engine implementing reverse-mode auto-differentiation, aka backpropagation.
 
 Heavily inspired by https://github.com/karpathy/micrograd/blob/master/micrograd/engine.py
 """
@@ -11,6 +11,8 @@ FloatInt = Union[float, int]
 
 
 class Var:
+    """ stores a single scalar value and its gradient """
+
     def __init__(self, data: FloatInt, children: Tuple["Var", ...] = (), op: str = "",
                  label: str = "") -> None:
         self.data: FloatInt = data
