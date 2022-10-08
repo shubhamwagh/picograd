@@ -30,7 +30,7 @@ class ComputationalGraphViz(ABC):
         Builds the computational graph and displays it
         :param root: root node of type Var
         :param rankdir: TB (top to bottom graph) | LR (left to right)
-        :return:
+        :return: Digraph
         """
 
         self._build_trace(root)
@@ -55,11 +55,11 @@ class ForwardGraphViz(ComputationalGraphViz):
     def __init__(self):
         super(ForwardGraphViz, self).__init__()
 
-    def _build_graph(self, rankdir: str = 'LR'):
+    def _build_graph(self, rankdir: str = 'LR') -> Digraph:
         """
         Builds the forward graph
         :param rankdir: TB (top to bottom graph) | LR (left to right)
-        :return:
+        :return: Digraph
         """
 
         assert rankdir in ['LR', 'TB'], f"Unexpected rankdir argument (TB, LR available). Got {rankdir}."
