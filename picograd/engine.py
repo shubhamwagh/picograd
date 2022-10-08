@@ -175,14 +175,3 @@ class Var:
         self.grad = 1.0
         for node in reversed(topo):
             node._backward()
-
-
-if __name__ == "__main__":
-    a = Var(2, label='a')
-    b = Var(5, label='b')
-    c = a * b + (a + b).tanh() + 9
-    c.backward()
-    from graph_viz import ForwardGraphViz
-    viz = ForwardGraphViz()
-    graph = viz.create_graph(c)
-    graph.view()
