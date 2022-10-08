@@ -24,9 +24,25 @@ class Var:
         self._op: str = op  # The operation that produced this node, for graphviz / debugging / etc
         self._label: str = label
 
+    @property
+    def children(self):
+        return self._prev
+
+    @property
+    def op(self):
+        return self._op
+
+    @property
+    def label(self):
+        return self._label
+
+    @label.setter
+    def label(self, label_name: str):
+        self._label = label_name
+
     def __repr__(self):
         if len(self._label) != 0:
-            return f"Var(data={self.data}, label={self._label})"
+            return f"Var(data={self.data}, label={self.label})"
         else:
             return f"Var(data={self.data})"
 
@@ -159,3 +175,14 @@ class Var:
         self.grad = 1.0
         for node in reversed(topo):
             node._backward()
+
+
+if __name__ == "__main__":
+    a = Var(2, label='a')
+    b = Var(5, label='b')
+    c = a * b + (a + b).tanh() + 9
+    c.backward()
+    from graph_viz import ForwardGraphViz
+    viz = ForwardGraphViz()
+    graph = viz.create_graph(c)
+    graph.view()
