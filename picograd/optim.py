@@ -42,6 +42,8 @@ class SGD(Optimizer):
 
 
 class Adam(Optimizer):
+    """Adam optimizer"""
+
     def __init__(self, parameters: List[Var], lr: float = 1e-3, beta_1: float = 0.0, beta_2: float = 0.999,
                  eps: float = 1e-8) -> None:
         super(Adam, self).__init__(parameters)
