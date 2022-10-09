@@ -69,6 +69,8 @@ class MLP(Module):
 
     def __init__(self, in_features: int, layers: List[int], activations: List[str]):
         sizes = [in_features] + layers
+        assert len(activations) != 0, "Please provide activation for layers. Available -> 'relu', 'tanh', 'sigmoid', 'linear'"
+        assert len(activations) == len(layers), "length of activations does not match the length of layers"
         self.layers = [Layer(in_features=sizes[i], out_features=sizes[i + 1], activation=activations[i])
                        for i in range(len(layers))]
 
