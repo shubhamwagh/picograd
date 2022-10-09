@@ -1,16 +1,21 @@
 import unittest
-import torch
 
 from picograd.engine import Var
 
 
 class TestEngine(unittest.TestCase):
     def test_scalar(self):
-        x = Var(1.0)
-        y = (x * 2 + 1).relu()
-        self.assertEqual(y.data, 3)
+        x = Var(-4.0)
+        z = 2 * x + 2 + x
+        q = z.relu() + z * x
+        h = (z * z).relu()
+        y = h + q + q * x
         y.backward()
-        self.assertEqual(x.grad, 2)  # dy/dx
+
+        # forward pass went well
+        self.assertEqual(y.data, -20.0)
+        # backward pass went well
+        self.assertEqual(x.grad, 46.0)
 
     def test_scalar_sub(self):
         x = Var(2.5)
@@ -84,31 +89,6 @@ class TestEngine(unittest.TestCase):
         z.backward()
         self.assertEqual(x.grad, -3)  # dz/dx
 
-
-class TestEngineVersusPyTorch(unittest.TestCase):
-    def test_sanity_check(self):
-        x = Var(-4.0)
-        z = 2 * x + 2 + x
-        q = z.relu() + z * x
-        h = (z * z).relu()
-        y = h + q + q * x
-        y.backward()
-        xmg, ymg = x, y
-
-        x = torch.Tensor([-4.0]).double()
-        x.requires_grad = True
-        z = 2 * x + 2 + x
-        q = z.relu() + z * x
-        h = (z * z).relu()
-        y = h + q + q * x
-        y.backward()
-        xpt, ypt = x, y
-
-        # forward pass went well
-        self.assertEqual(ymg.data, ypt.data.item())
-        # backward pass went well
-        self.assertEqual(xmg.grad, xpt.grad.item())
-
     def test_more_ops(self):
         a = Var(-4.0)
         b = Var(2.0)
@@ -117,37 +97,19 @@ class TestEngineVersusPyTorch(unittest.TestCase):
         c += c + 1
         c += 1 + c + (-a)
         d += d * 2 + (b + a).relu()
-        d += 3 * d + (b - a).relu()
+        d += 3 * d + (b - a).tanh()
         e = c - d
         f = e ** 2
         g = f / 2.0
         g += 10.0 / f
-        g.backward()
-        amg, bmg, gmg = a, b, g
+        h = g.sigmoid()
+        h.backward()
 
-        a = torch.Tensor([-4.0]).double()
-        b = torch.Tensor([2.0]).double()
-        a.requires_grad = True
-        b.requires_grad = True
-        c = a + b
-        d = a * b + b ** 3
-        c = c + c + 1
-        c = c + 1 + c + (-a)
-        d = d + d * 2 + (b + a).relu()
-        d = d + 3 * d + (b - a).relu()
-        e = c - d
-        f = e ** 2
-        g = f / 2.0
-        g = g + 10.0 / f
-        g.backward()
-        apt, bpt, gpt = a, b, g
-
-        tol = 1e-6
         # forward pass went well
-        self.assertLess(abs(gmg.data - gpt.data.item()), tol)
+        self.assertAlmostEqual(h.data, 0.989, 3)
         # backward pass went well
-        self.assertLess(abs(amg.grad - apt.grad.item()), tol)
-        self.assertLess(abs(bmg.grad - bpt.grad.item()), tol)
+        self.assertAlmostEqual(a.grad, -0.115, 3)
+        self.assertAlmostEqual(b.grad, -0.505, 3)
 
 
 if __name__ == "__main__":
