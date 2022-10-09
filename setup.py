@@ -11,7 +11,7 @@ with open("README.md") as f:
 
 setup(
     name='picograd',
-    version='1.0.0',
+    version='1.0.1',
     description='A lightweight machine learning framework',
     url='https://github.com/shubhamwagh/picograd',
     long_description=README,
