@@ -70,7 +70,7 @@ class Var:
 
     def __mul__(self, other: Union["Var", FloatInt]) -> "Var":
         other = other if isinstance(other, Var) else Var(other)
-        out = Var(self.data * other.data, children=(self, other), op='x')
+        out = Var(self.data * other.data, children=(self, other), op='*')
 
         def _backward() -> None:
             self.grad += other.data * out.grad
@@ -85,7 +85,7 @@ class Var:
 
     def __pow__(self, other: FloatInt) -> "Var":
         assert isinstance(other, (int, float)), "only supporting int/flot powers for now"
-        out = Var(self.data ** other, children=(self,), op=f'pow{other}')
+        out = Var(self.data ** other, children=(self,), op=f'**{other}')
 
         def _backward() -> None:
             self.grad += other * (self.data ** (other - 1)) * out.grad
@@ -173,3 +173,16 @@ class Var:
         self.grad = 1.0
         for node in reversed(topo):
             node._backward()
+
+
+if __name__ =="__main__":
+    from picograd.graph_viz import ForwardGraphViz
+
+    graph_builder = ForwardGraphViz()
+
+    x = Var(1.0, label='x')
+    y = (x * 2 + 1).relu()
+    y.label = 'y'
+    y.backward()
+
+    graph_builder.create_graph(y).view()
