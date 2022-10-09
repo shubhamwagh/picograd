@@ -35,5 +35,6 @@ setup(
     keywords='picograd, autograd, backprop, nn, graph',
     packages=find_packages(),
     python_requires='>=3.6, <4',
+    data_files=[('misc', ['misc/moon_mlp.png', 'misc/simple_graph.png'])],
     install_requires=[],
 )
