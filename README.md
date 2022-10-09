@@ -100,4 +100,4 @@ Decision boundary:
 
 ## License
 
-[MIT](LICENSE)
+MIT
