@@ -4,7 +4,7 @@
   <br>
 </h1>
 
-<h4 align="center">A lightweight deep learning framework.</h4>
+<h4 align="center">A lightweight machine learning framework</h4>
 
 [//]: # (<p align="center">)
 
