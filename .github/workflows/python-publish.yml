@@ -31,7 +31,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install build
     - name: Test with unittest
-      run: python -m unittest discover -s tests/test_*.py
+      run: python -m unittest discover -s tests/
     - name: Build package
       run: python -m build
     - name: Publish package
