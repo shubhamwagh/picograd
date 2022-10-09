@@ -94,5 +94,3 @@ Decision boundary:
 ## License
 
 [MIT](LICENSE)
-
----
