@@ -17,7 +17,7 @@ setup(
     long_description=README,
     long_description_content_type='text/markdown',
     license="MIT",
-    platforms=['Ubuntu 20.04', 'Windows'],
+    platforms=['Ubuntu 20.04', 'Ubuntu 21.04', 'Windows'],
     author='Shubham Wagh',
     author_email='shubhamwagh48@gmail.com',
     classifiers=[
