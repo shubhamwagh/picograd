@@ -11,7 +11,7 @@ with open("README.md") as f:
 
 setup(
     name='picograd',
-    version='1.0.3',
+    version='1.0.4',
     description='A lightweight machine learning framework',
     url='https://github.com/shubhamwagh/picograd',
     long_description=README,
@@ -36,5 +36,5 @@ setup(
     packages=find_packages(),
     python_requires='>=3.6, <4',
     data_files=[('misc', ['misc/moon_mlp.png', 'misc/simple_graph.png'])],
-    install_requires=[],
+    install_requires=['graphviz'],
 )
