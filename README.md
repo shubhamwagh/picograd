@@ -32,14 +32,16 @@ Additional tools are developed to visualize forward computational graph.
 ## Features
 - PyTorch-like auto-differentiation engine (dynamically constructed computational graph)
 - [Keras](https://keras.io/)-like simple training API 
+- Neural networks API
 - Activations: ReLU, Sigmoid, tanh
 - Optimizers: SGD, Adam
 - Loss: Mean squared error
 - Accuracy: Binary accuracy
+- Data utilities
 - Computational graph visualizer
 
 ## Examples
-Demo jupyter notebook can be found [here](demo.ipynb).
+The [demo notebook](demo.ipynb) showcases what picograd is all about.
 
 ### Example Usage
 ```python
