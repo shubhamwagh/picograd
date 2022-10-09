@@ -22,7 +22,7 @@ class TestTrainer(unittest.TestCase):
 
         num_epochs = 50
         trainer = Trainer(model, optimizer, loss=mean_squared_error, acc_metric=binary_accuracy)
-        history: History = trainer.fit(data_iterator, num_epochs=num_epochs, verbose=True)
+        history: History = trainer.fit(data_iterator, num_epochs=num_epochs, verbose=False)
 
         # Training metrics are recorded for each epoch
         self.assertEqual(len(history["loss"]), len(history["acc"]))
