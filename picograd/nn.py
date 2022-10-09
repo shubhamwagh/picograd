@@ -31,11 +31,11 @@ class Neuron(Module):
         out = sum([w_i * x_i for w_i, x_i in zip(self.w, x)], self.b)
         if self.activation is None or self.activation is 'linear':
             return out
-        elif self.activation is 'relu':
+        elif self.activation == 'relu':
             return out.relu()
-        elif self.activation is 'tanh':
+        elif self.activation == 'tanh':
             return out.tanh()
-        elif self.activation is 'sigmoid':
+        elif self.activation == 'sigmoid':
             return out.sigmoid()
         raise NotImplementedError(
             f"Unexpected activation argument ('relu', 'tanh' and 'sigmoid' available). Got {self.activation}.")
