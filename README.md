@@ -1,5 +1,6 @@
 [![Unit tests](https://github.com/shubhamwagh/picograd/actions/workflows/ci.yml/badge.svg)](https://github.com/shubhamwagh/picograd/actions/workflows/ci.yml)
 [![Build](https://github.com/shubhamwagh/picograd/actions/workflows/python-publish.yml/badge.svg)](https://github.com/shubhamwagh/picograd/actions/workflows/python-publish.yml)
+[![Python Versions](https://img.shields.io/pypi/pyversions/picograd.svg)](https://pypi.org/project/picograd)
 [![PyPI Version](https://img.shields.io/pypi/v/picograd.svg)](https://pypi.org/project/picograd)
 [![PyPI status](https://img.shields.io/pypi/status/picograd.svg)](https://pypi.python.org/project/picograd)
 <h1 align="center">
