@@ -15,6 +15,7 @@
 <p align="center">
   <a href="#description">Description</a> •
   <a href="#features">Features</a> •
+  <a href="#examples">Examples</a> •
   <a href="#references">References</a> •
   <a href="#license">License</a>
 </p>
@@ -35,7 +36,10 @@ Additional tools are developed to visualize forward computational graph.
 - Optimizers: SGD, Adam
 - Loss: Mean squared error
 - Accuracy: Binary accuracy
-- Computational graph visualizer (see example)
+- Computational graph visualizer
+
+## Examples
+Demo jupyter notebook can be found [here](demo.ipynb).
 
 ### Example Usage
 ```python
@@ -83,6 +87,7 @@ trainer = Trainer(model, optimizer, loss=mean_squared_error, acc_metric=binary_a
 history = trainer.fit(data_iterator, num_epochs=70, verbose=True)
 ```
 Decision boundary:
+
 ![mlp](./misc/moon_mlp.png)
 ## References
 
