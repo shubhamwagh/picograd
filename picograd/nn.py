@@ -55,7 +55,7 @@ class Layer(Module):
 
     def __call__(self, x: List[Var]) -> List[Var]:
         outs = [n(x) for n in self.neurons]
-        return outs[0] if len(outs) == 1 else outs
+        return outs  # outs[0] if len(outs) == 1 else outs
 
     def parameters(self) -> List[Var]:
         return [p for n in self.neurons for p in n.parameters()]

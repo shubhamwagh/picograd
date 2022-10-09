@@ -24,27 +24,30 @@ class Optimizer(ABC):
 class SGD(Optimizer):
     """Stochastic Gradient Descent optimizer"""
 
-    def __init__(self, parameters: List[Var], lr: float = 0.01, momentum: float = 0.0) -> None:
+    def __init__(self, parameters: List[Var], lr: float = 0.01, momentum: float = 0.0, nesterov: bool = False) -> None:
         super(SGD, self).__init__(parameters)
         assert momentum >= 0.0, "momentum cannot be negative"
         self.lr = lr
         self.momentum = momentum
+        self.nesterov = nesterov
 
-        self._momentums = [0] * len(parameters)
+        self._velocity = [0] * len(parameters)
 
     def step(self) -> None:
         """Update model parameters in the opposite direction of their gradient"""
 
         for ind, p in enumerate(self.parameters):
-            # p.data -= self.lr * p.grad
-            self._momentums[ind] = self._momentums[ind] * self.momentum + self.lr * p.grad
-            p.data -= self._momentums[ind]
+            self._velocity[ind] = (self._velocity[ind] * self.momentum) - self.lr * p.grad
+            if self.nesterov:
+                p.data += self._velocity[ind] * self.momentum - self.lr * p.grad
+            else:
+                p.data += self._velocity[ind]
 
 
 class Adam(Optimizer):
     """Adam optimizer"""
 
-    def __init__(self, parameters: List[Var], lr: float = 1e-3, beta_1: float = 0.0, beta_2: float = 0.999,
+    def __init__(self, parameters: List[Var], lr: float = 1e-3, beta_1: float = 0.9, beta_2: float = 0.999,
                  eps: float = 1e-8) -> None:
         super(Adam, self).__init__(parameters)
         assert (0 <= beta_1) and (beta_1 < 1), "smoothing factor must be in [0,1)"

@@ -1,6 +1,7 @@
 import random
-from typing import NamedTuple, Iterator, List
 from picograd.engine import Var
+
+from typing import NamedTuple, Iterator, List
 
 Batch = NamedTuple("Batch", [("inputs", List[List[Var]]), ("targets", List[Var])])
 
