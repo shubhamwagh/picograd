@@ -29,7 +29,7 @@ class Neuron(Module):
     def __call__(self, x):
         # w * x + b
         out = sum([w_i * x_i for w_i, x_i in zip(self.w, x)], self.b)
-        if self.activation is None or self.activation is 'linear':
+        if self.activation is None or self.activation == 'linear':
             return out
         elif self.activation == 'relu':
             return out.relu()
