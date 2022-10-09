@@ -15,7 +15,7 @@
 <p align="center">
   <a href="#description">Description</a> •
   <a href="#features">Features</a> •
-  <a href="#todo">References</a> •
+  <a href="#references">References</a> •
   <a href="#license">License</a>
 </p>
 
